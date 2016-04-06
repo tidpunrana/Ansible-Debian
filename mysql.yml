@@ -1,0 +1,14 @@
+---
+- hosts: local
+  tasks:
+    - name: Install MySQL client
+      apt: pkg=mysql-client state=installed
+
+    - name: Install MySQL server
+      apt: pkg=mysql-client state=installed
+      notify:
+        - start mysql server
+
+  handlers:
+    - name: start mysql server
+      service: name=mysql state=started

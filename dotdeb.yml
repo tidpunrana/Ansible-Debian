@@ -1,0 +1,11 @@
+---
+- hosts: local
+  tasks:
+    - name: Add Dotdeb GPG key
+      apt_key: url='http://www.dotdeb.org/dotdeb.gpg' state=present
+
+    - name: Add Dotdeb repositories
+      apt_repository: repo='deb http://packages.dotdeb.org wheezy all' state=present
+
+    - name: Update apt cache
+      apt: update_cache=yes

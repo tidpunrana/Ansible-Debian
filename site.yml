@@ -1,0 +1,6 @@
+# site.yml
+---
+- include: dotdeb.yml
+- include: php.yml
+- include: mysql.yml
+- include: nginx.yml

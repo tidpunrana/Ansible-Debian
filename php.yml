@@ -1,0 +1,45 @@
+---
+- hosts: local
+  tasks:
+    - name: Install PHP-FPM
+      apt: pkg=php5-fpm state=installed
+
+    - name: Install PHP packages
+      apt: pkg={{ item }} state=installed
+      with_items:
+        - php5-mysql
+        - php5-curl
+        - php5-gd
+        - php5-intl
+        - php-pear
+        - php5-imagick
+        - php5-imap
+        - php5-mcrypt
+        - php5-memcache
+        - php5-ming
+        - php5-ps
+        - php5-pspell
+        - php5-recode
+        - php5-snmp
+        - php5-sqlite
+        - php5-tidy
+        - php5-xmlrpc
+        - php5-xsl
+
+    - name: Install PHP-APC
+      apt: pkg=php-apc state=installed
+
+    - name: Remove Apache web server
+      apt: pkg={{ item }} state=absent
+      with_items:
+        - apache2
+        - apache2.2-common
+        - apache2-doc
+        - apache2-mpm-prefork
+        - apache2-utils
+      notify:
+        - start php-fpm
+
+  handlers:
+    - name: start php-fpm
+      service: name=php5-fpm state=restarted

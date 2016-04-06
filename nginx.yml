@@ -1,0 +1,14 @@
+---
+- hosts: local
+  tasks:
+    - name: Install nginx web server
+      apt: pkg=nginx state=installed
+      notify:
+        - start nginx
+
+    - name: Upload default index.html for host
+      copy: src=static_files/index.php dest=/var/www/ mode=0644
+
+  handlers:
+    - name: start nginx
+      service: name=nginx state=started
