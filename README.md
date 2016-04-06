@@ -2,7 +2,7 @@
 
 ## What is This?
 
-[Ansible playbooks](http://docs.ansible.com/ansible/playbooks.html) for setting up an LEMP server instance (nginx, MySQL, PHP5).
+[Ansible playbooks](http://docs.ansible.com/ansible/playbooks.html) for installing LEMP stack (nginx, MySQL, PHP5) on a new [Debian](https://www.debian.org/) server instance.
 
 ## How to Use
 
