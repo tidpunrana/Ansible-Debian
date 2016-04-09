@@ -30,6 +30,9 @@
     - name: Install fcgiwrap
       apt: name=fcgiwrap state=installed
 
+    - name: Disable potential PHP security risk
+      lineinfile: dest=/etc/php5/fpm/php.ini regexp='^(.*)cgi.fix_pathinfo=' line='cgi.fix_pathinfo=0'
+
     - name: Remove Apache web server
       apt: pkg={{ item }} state=absent
       with_items:
@@ -43,4 +46,4 @@
 
   handlers:
     - name: Start php-fpm
-      service: name=php5-fpm state=started
+      service: name=php5-fpm state=restarted
