@@ -2,7 +2,7 @@
 - hosts: local
   tasks:
     - name: Install MySQL client
-      apt: pkg=mysql-client state=installed
+      apt: pkg=mysql-client state=installed update_cache=yes
 
     - name: Install MySQL server
       apt: pkg=mysql-client state=installed

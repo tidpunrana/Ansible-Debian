@@ -2,7 +2,7 @@
 - hosts: local
   tasks:
     - name: Install PHP-FPM
-      apt: pkg=php5-fpm state=installed
+      apt: name=php5-fpm state=installed update_cache=yes
 
     - name: Install PHP packages
       apt: pkg={{ item }} state=installed
@@ -16,8 +16,6 @@
         - php5-imap
         - php5-mcrypt
         - php5-memcache
-        - php5-ming
-        - php5-ps
         - php5-pspell
         - php5-recode
         - php5-snmp
@@ -27,7 +25,10 @@
         - php5-xsl
 
     - name: Install PHP-APC
-      apt: pkg=php-apc state=installed
+      apt: name=php-apc state=installed
+
+    - name: Install fcgiwrap
+      apt: name=fcgiwrap state=installed
 
     - name: Remove Apache web server
       apt: pkg={{ item }} state=absent
@@ -38,8 +39,8 @@
         - apache2-mpm-prefork
         - apache2-utils
       notify:
-        - start php-fpm
+        - Start php-fpm
 
   handlers:
-    - name: start php-fpm
-      service: name=php5-fpm state=restarted
+    - name: Start php-fpm
+      service: name=php5-fpm state=started
