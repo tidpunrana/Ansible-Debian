@@ -1,0 +1,12 @@
+---
+- hosts: local
+  tasks:
+    - name: Install misc. utilities
+      apt: name={{ item }} state=installed
+      with_items:
+        - rsync
+        - htop
+        - tmux
+        
+    - name: Copy tmux configuration file
+      copy: src=static_files/.tmux.conf dest=/home/{{ ansible_ssh_user }} owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }}
