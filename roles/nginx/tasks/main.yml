@@ -1,0 +1,44 @@
+---
+- name: Install nginx web server
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+  notify:
+    - start nginx
+
+- name: Upload default index.php for host
+  copy:
+    src: index.php
+    dest: /var/www/
+    mode: 0644
+    owner: www-data
+    group: www-data
+
+- name: Upload nginx PHP configuration file
+  copy:
+    src: php.conf
+    dest: /etc/nginx
+
+- name: Upload nginx example host configuration file
+  copy:
+    src: example.conf
+    dest: /etc/nginx/sites-available
+
+- name: Create symlink for example host configuration file
+  file:
+    src: /etc/nginx/sites-available/example.conf
+    dest: /etc/nginx/sites-enabled/example.conf
+    state: link
+
+- name: Remove nginx boilerplate HTML files
+  file:
+    path: /var/www/html
+    state: absent
+
+- name: Remove nginx boilerplate configuration
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify:
+    - start nginx

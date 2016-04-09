@@ -1,0 +1,7 @@
+---
+- name: Provision a fresh Debian install with LEMP stack
+  roles:
+    - dotdeb
+    - php
+    - mysql
+    - nginx
