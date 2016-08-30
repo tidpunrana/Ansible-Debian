@@ -1,13 +1,14 @@
 ---
 - name: Install PHP-FPM, PHP-APC & fcgiwrap
+  tags: php
   apt: pkg={{ item }} state=present
   with_items:
     - php5-fpm
     - php-apc
     - fcgiwrap
-  update_cache: yes
 
 - name: Install PHP packages
+  tags: php
   apt: pkg={{ item }} state=present
   with_items:
     - php5-mysql
@@ -28,12 +29,14 @@
     - php5-xsl
 
 - name: Disable potential PHP security risk
+  tags: php
   lineinfile:
     dest: /etc/php5/fpm/php.ini
     regexp: '^(.*)cgi.fix_pathinfo='
     line: 'cgi.fix_pathinfo=0'
 
 - name: Remove Apache web server
+  tags: php
   apt: pkg={{ item }} state=absent
   with_items:
     - apache2

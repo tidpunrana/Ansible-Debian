@@ -1,5 +1,6 @@
 ---
 - name: Install MySQL server
+  tags: mysql
   apt:
     name: mysql-server
     state: present

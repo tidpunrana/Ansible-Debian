@@ -1,5 +1,6 @@
 ---
 - name: Install misc. utilities
+  tags: utils
   apt: name={{ item }} state=installed
   with_items:
     - rsync

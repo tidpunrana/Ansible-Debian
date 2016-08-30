@@ -1,7 +1,9 @@
 ---
 - name: Provision a fresh Debian install with LEMP stack
+  hosts: host
   roles:
     - dotdeb
     - php
     - mysql
     - nginx
+    - utils

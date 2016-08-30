@@ -1,5 +1,6 @@
 ---
 - name: Install nginx web server
+  tags: nginx
   apt:
     name: nginx
     state: present
@@ -8,35 +9,41 @@
     - start nginx
 
 - name: Upload default index.php for host
+  tags: nginx
   copy:
-    src: index.php
+    src: templates/index.php
     dest: /var/www/
     mode: 0644
     owner: www-data
     group: www-data
 
 - name: Upload nginx PHP configuration file
+  tags: nginx
   copy:
-    src: php.conf
+    src: templates/php.conf
     dest: /etc/nginx
 
 - name: Upload nginx example host configuration file
+  tags: nginx
   copy:
-    src: example.conf
+    src: templates/example.conf
     dest: /etc/nginx/sites-available
 
 - name: Create symlink for example host configuration file
+  tags: nginx
   file:
     src: /etc/nginx/sites-available/example.conf
     dest: /etc/nginx/sites-enabled/example.conf
     state: link
 
 - name: Remove nginx boilerplate HTML files
+  tags: nginx
   file:
     path: /var/www/html
     state: absent
 
 - name: Remove nginx boilerplate configuration
+  tags: nginx
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
