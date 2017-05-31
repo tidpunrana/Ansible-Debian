@@ -1,15 +1,20 @@
 ---
-- name: start mysql server
-  service:
+ - name: start mysql server
+   service:
     name: mysql-server
     state: restarted
 
-  - name: start php-fpm
-    service:
-      name: php5-fpm
-      state: restarted
-      
-  - name: start nginx
-    service:
-      name: nginx
-      state: restarted
+ - name: start php-fpm
+   service:
+    name: php5-fpm
+    state: restarted
+
+ - name: start nginx
+   service:
+    name: nginx
+    state: restarted
+
+ - name: start ntp
+   service:
+    name: ntp
+    state: restarted

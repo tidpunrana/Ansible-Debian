@@ -1,0 +1,11 @@
+- name: install phpMyAdmin is installed.
+  apt: name=phpmyadmin state=installed
+
+- name: Create symlink for PHP Myadmin configuration file
+  tags: phpmyadmin
+  file:
+    src: /usr/share/phpmyadmin/
+    dest: /home/10kthailand/domains/10kthailandchampionship.com/public_html/top
+    state: link
+
+

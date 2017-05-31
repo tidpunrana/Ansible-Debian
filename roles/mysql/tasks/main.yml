@@ -1,8 +1,6 @@
 ---
-- name: Install MySQL server
-  tags: mysql
-  apt:
-    name: mysql-server
-    state: present
-  notify:
-    - start mysql server
+
+- name: System - Install MySQL
+  apt: pkg={{item}} state=present
+  with_items:
+    - mysql-server

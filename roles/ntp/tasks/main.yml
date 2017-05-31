@@ -1,0 +1,18 @@
+- name: install ntp is installed.
+  apt: name=ntp state=installed
+
+- name: Remove ntp.conf  files
+  tags: ntp
+  file:
+    path: /etc/ntp.conf
+    state: absent
+
+- name: Upload ntp configuration file
+  tags: ntp
+  copy:
+    src: templates/ntp.conf
+    dest: /etc/ntp.conf
+   
+- name: set locale
+  command: cp /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+
