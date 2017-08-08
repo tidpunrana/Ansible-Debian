@@ -1,0 +1,4 @@
+---
+wp_mysql_db: mvision_db
+wp_mysql_user: mvision@123
+wp_mysql_password: P@ssw0rd

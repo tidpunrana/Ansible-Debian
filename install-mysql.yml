@@ -1,0 +1,7 @@
+---
+- name: Automation MySQL Stack 
+  hosts: databases webserver
+  roles:
+   - python
+   - mysql
+

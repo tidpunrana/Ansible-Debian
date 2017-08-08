@@ -1,0 +1,5 @@
+- name: install tomcat8 is installed.
+  apt: "pkg={{ item }} state=installed"
+  with_items:
+   - tomcat8
+   - tomcat8-admin

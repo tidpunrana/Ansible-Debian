@@ -1,0 +1,13 @@
+---
+- name: Automation Webserver Stack 
+  hosts: webserver
+  roles:
+   - python
+   - mysql 
+   - php-7.0
+   - nginx
+   - phpmyadmin
+  #- wordpress
+   - ntp 
+   - ssh-key
+

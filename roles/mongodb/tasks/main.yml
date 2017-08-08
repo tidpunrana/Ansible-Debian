@@ -1,0 +1,4 @@
+- name: install mongodb is installed.
+  apt: "pkg={{ item }} state=installed"
+  with_items:
+   - mongodb

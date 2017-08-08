@@ -1,0 +1,4 @@
+- name: install redis is installed.
+  apt: "pkg={{ item }} state=installed"
+  with_items:
+   - redis

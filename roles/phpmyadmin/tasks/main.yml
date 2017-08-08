@@ -5,7 +5,7 @@
   tags: phpmyadmin
   file:
     src: /usr/share/phpmyadmin/
-    dest: /home/10kthailand/domains/10kthailandchampionship.com/public_html/top
+    dest: /home/Root/domains/website.com/public_html/top
     state: link
 
 

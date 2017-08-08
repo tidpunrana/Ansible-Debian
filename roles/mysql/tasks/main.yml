@@ -3,4 +3,16 @@
 - name: System - Install MySQL
   apt: pkg={{item}} state=present
   with_items:
-    - mysql-server
+    - mariadb-server
+    - python-mysqldb
+- name: start sql service and enable the service
+  service: name=mysql state=restarted enabled=yes
+
+- name: Create mysql database
+  mysql_db: name={{ wp_mysql_db }} state=present
+
+- name: Create mysql user
+  mysql_user: 
+    name={{ wp_mysql_user }} 
+    password={{ wp_mysql_password }} 
+    priv=*.*:ALL

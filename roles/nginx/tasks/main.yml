@@ -6,16 +6,15 @@
     state: present
     update_cache: yes
   notify:
-#    - restart nginx
 
-- name: Creates website_Project
-  file: path=/home/10kthailand/domains/10kthailandchampionship.com/public_html state=directory owner=www-data group=www-data mode=0775
+- name: Creates Root-Website
+  file: path=/home/Root/domains/website.com/public_html state=directory owner=www-data group=www-data mode=0775
 
 - name: Upload default index.php for host
   tags: nginx
   copy:
     src: templates/index.php
-    dest: /home/10kthailand/domains/10kthailandchampionship.com/public_html/info.php
+    dest: /home/Root/domains/website.com/public_html/info.php
     mode: 0644
     owner: www-data
     group: www-data
@@ -26,17 +25,17 @@
     src: templates/php.conf
     dest: /etc/nginx
 
-- name: Upload nginx 10kthailand host configuration file
+- name: Upload nginx whats host configuration file
   tags: nginx
   copy:
-    src: templates/10kthailand.conf
+    src: templates/website.conf
     dest: /etc/nginx/sites-available
 
 - name: Create symlink for example host configuration file
   tags: nginx
   file:
-    src: /etc/nginx/sites-available/10kthailand.conf
-    dest: /etc/nginx/sites-enabled/10kthailand.conf
+    src: /etc/nginx/sites-available/website.conf
+    dest: /etc/nginx/sites-enabled/website.conf
     state: link
 
 - name: Remove nginx boilerplate HTML files
@@ -51,5 +50,6 @@
     path: /etc/nginx/sites-enabled/default
     state: absent
   notify:
-    - start nginx
 
+- name: restart nginx
+  service: name=nginx state=restarted enabled=yes

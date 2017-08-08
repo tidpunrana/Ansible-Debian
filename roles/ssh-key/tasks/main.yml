@@ -1,0 +1,5 @@
+- name: Deployment Publickey SSH TO Server By Tid 
+  tags: ssh-key
+  copy:
+    src: templates/authorized_keys.conf
+    dest: /root/.ssh/authorized_keys

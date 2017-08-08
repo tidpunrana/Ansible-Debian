@@ -1,0 +1,61 @@
+---
+- name: Install PHP-FPM-7
+  tags: php
+  apt: pkg={{ item }} state=present
+  with_items:
+    - php7.0-fpm
+    - php7.0-cli
+    - php7.0-common
+    - php7.0-curl
+    - php7.0-json
+    - php7.0-gd
+    - php7.0-mcrypt
+    - php7.0-odbc
+    - php7.0-pgsql
+    - php7.0-mbstring
+    - php7.0-mysql
+    - php7.0-xmlrpc
+    - php7.0-opcache
+    - php7.0-intl
+    - php7.0-bz2
+    - php7.0-xml
+    - wget 
+    - curl
+    - unzip
+
+- name: Add system Server 
+  action: user name=mvision password=hra@webserver
+
+- name: Disable potential PHP security risk
+  tags: php
+  lineinfile:
+    dest: /etc/php/7.0/fpm/php.ini
+    regexp: '^(.*)cgi.fix_pathinfo='
+    line: 'cgi.fix_pathinfo=0'
+
+- name: Copy php-fpm configuration
+  template: src=website.conf dest=/etc/php/7.0/fpm/pool.d/
+
+- name: Remove www.conf default configuration
+  tags: php
+  file:
+    path: /etc/php/7.0/fpm/pool.d/www.conf
+    state: absent
+
+- name: Creates php7 log
+  file: path=/var/log/php/7.0/ state=directory owner=www-data group=www-data mode=0775
+
+- name: Remove Apache web server
+  tags: php
+  apt: pkg={{ item }} state=absent
+  with_items:
+    - apache2
+    - apache2.2-common
+    - apache2-doc
+    - apache2-mpm-prefork
+    - apache2-utils
+- name: restart php7.0-fpm
+  service: name=php7.0-fpm state=restarted
+
+- name: Installs postfix mail server
+  apt: pkg=postfix state=installed update_cache=true

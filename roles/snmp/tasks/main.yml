@@ -1,11 +1,6 @@
 - name: install snmp is installed.
   apt: name=snmp state=installed
 
-#- name: Create symlink for snmp  configuration file
-#  tags: phpmyadmin
-#  file:
-#    src: /usr/share/phpmyadmin/
-#    dest: /home/website/www/top
-#    state: link
-
+- name: install unattended-upgrades
+  apt: pkg=unattended-upgrades state=present
 
